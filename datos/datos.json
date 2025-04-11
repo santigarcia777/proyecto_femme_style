@@ -1,0 +1,41 @@
+{
+    "productos": [
+      {
+        "id": 1,
+        "nombre": "JOSEPHINE BLACK MIDI DRESS",
+        "precio": 159.00,
+        "imagen": "../img/card1.png"
+      },
+      {
+        "id": 2,
+        "nombre": "JOSEPHINE BORDEAUZ MIDI DRESS",
+        "precio": 159.00,
+        "imagen": "../img/card2.png"
+      },
+      {
+        "id": 3,
+        "nombre": "TILLY IVORY PROM DRESS",
+        "precio": 259.00,
+        "imagen": "../img/card3.png"
+      },
+      {
+        "id": 4,
+        "nombre": "CHRISTINA BLACK PENCIL DRESS",
+        "precio": 129.00,
+        "imagen": "../img/card4.png"
+      },
+      {
+        "id": 5,
+        "nombre": "HOURGLASS CHARTWELL NAVY SWING DRESS",
+        "precio": 149.00,
+        "imagen": "../img/card5.png"
+      },
+
+      {
+        "id": 6,
+        "nombre": "ANAIS BLACK & PINK BUSTIER PENCIL DRESS",
+        "precio": 139.00,
+        "imagen": "../img/card6.png"
+      }
+    ]
+  }
