@@ -92,5 +92,76 @@ async function mostrarProductos() {
     });
 }
 
-// Iniciar la carga de productos cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', mostrarProductos);
+
+
+
+
+
+
+
+// Función para guardar un nuevo producto en el JSON
+async function guardarNuevoProducto(producto) {
+    try {
+        // Validar que el producto tenga los campos requeridos
+        if (!producto.nombre || !producto.descripcion || !producto.precio) {
+            throw new Error('faltan camapos');
+        }
+        
+        let productos = await cargarProductos();
+
+        let nuevoId = productos.length > 0
+            ? Math.max(...productos.map(p => p.id)) + 1
+            : 1;
+
+        const nuevoProducto = {
+            id: nuevoId,
+            nombre: producto.nombre,
+            precio: parseFloat(producto.precio),
+            imagen: producto.imagen || 'https://via.placeholder.com/300x200?text=Nuevo+Producto',
+        };
+        // Agregar el producto al array
+        productos.push(nuevoProducto);
+        
+        // Guardar en localStorage para persistencia en modo desarrollo
+        localStorage.setItem('productosData', JSON.stringify({ productos }));
+        
+        console.log('Producto guardado correctamente');
+
+        return true;
+    } catch (err) {
+        console.error('Error al guardar:', err);
+        alert('No se pudo guardar el producto. ' + err.message);
+        return false;
+    }
+}
+
+// Iniciar la app
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarVista('catalogo');
+
+    document.getElementById('btn-ver-productos').addEventListener('click', () => {
+        mostrarVista('catalogo');
+    });
+
+    document.getElementById('btn-agregar-producto').addEventListener('click', () => {
+        mostrarVista('formulario');
+    });
+
+    const form = document.getElementById('formulario-producto');
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const producto = {
+            nombre: document.getElementById('nombre').value,
+            precio: document.getElementById('precio').value,
+            imagen: document.getElementById('imagen').value,
+            
+        };
+
+        const exito = await guardarNuevoProducto(producto);
+        if (exito) {
+            form.reset();
+            mostrarVista('catalogo');
+        }
+    });
+});

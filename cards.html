@@ -137,20 +137,108 @@
 
 
 
-
-
-
-
-    
     <section class="productos">
-    
-        
-    </section>
     
 
 
 </aside>
- 
+</section>
+    
+   
+
+    
+
+    <!-- Sección donde se mostrarán los productos -->
+<!-- Botones para cambiar entre vistas -->
+<div class="navegacion-vista">
+    <button id="btn-ver-productos" class="botones-navegacion">Productos</button>
+    <button id="btn-agregar-producto" class="botones-navegacion">Agregar un nuevo Producto</button>
+</div>
+
+
+
+<!-- Sección donde se mostrarán los productos -->
+<section id="seccion-catalogo" class="seccion-activa">
+    <div class="cajamadreproductos">
+        <section class="productos-lista">
+            <h1>conoce más productos</h1>
+            <div class="productos-grid" id="productos-grid">
+                <!-- Aquí se cargarán los productos -->
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Formulario para agregar un producto -->
+<section id="seccion-formulario" class="seccion-oculta">
+    <div class="formularioagregar">
+    <form id="formulario-producto">
+        <h1 id="AGREGARtexto">Agregar Nuevo Producto</h1>
+        <input type="text" id="nombre" placeholder="Nombre" class="campotexto">
+        <input type="number" id="precio" placeholder="Precio" class="campotexto">
+        <input type="text" id="imagen" placeholder="URL de la imagen" class="campotexto">
+        <button type="submit">Guardar</button>
+    </form>
+    </div>  
+</section>
+
+
+<script src="js/script.js"></script>
+
+<script>
+    // Script para manejar la navegación y el formulario
+    document.addEventListener('DOMContentLoaded', function() {
+        const seccionCatalogo = document.getElementById('seccion-catalogo');
+        const seccionFormulario = document.getElementById('seccion-formulario');
+        const mostrarCatalogo = document.getElementById('mostrar-catalogo');
+        const mostrarFormulario = document.getElementById('mostrar-formulario');
+        const formularioProducto = document.getElementById('formulario-producto');
+        
+        // Función para cambiar entre secciones
+        mostrarCatalogo.addEventListener('click', function() {
+            seccionCatalogo.classList.add('seccion-activa');
+            seccionCatalogo.classList.remove('seccion-oculta');
+            seccionFormulario.classList.add('seccion-oculta');
+            seccionFormulario.classList.remove('seccion-activa');
+        });
+        
+        mostrarFormulario.addEventListener('click', function() {
+            seccionFormulario.classList.add('seccion-activa');
+            seccionFormulario.classList.remove('seccion-oculta');
+            seccionCatalogo.classList.add('seccion-oculta');
+            seccionCatalogo.classList.remove('seccion-activa');
+        });
+        
+        // Manejar el envío del formulario
+        formularioProducto.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const nuevoProducto = {
+                nombre: document.getElementById('nombre').value,
+                descripcion: document.getElementById('descripcion').value,
+                precio: document.getElementById('precio').value,
+                imagen: document.getElementById('imagen').value
+            };
+            
+            const resultado = await guardarNuevoProducto(nuevoProducto);
+            
+            if (resultado) {
+                // Limpiar el formulario
+                formularioProducto.reset();
+                
+                // Mostrar mensaje de éxito
+                alert('Producto guardado con éxito');
+                
+                // Cambiar a la vista de catálogo
+                mostrarCatalogo.click();
+            }
+        });
+    });
+</script>
+
+
+
+
 
 
 
@@ -262,6 +350,5 @@
 Kent, DA11 8HD, Registered in United Kingdom <br>Company Registration Number 06687574 VAT no. 947986348</p>
 </div>
 </footer>
-<script src="js/script.js"></script>
 </body>
 </html>
